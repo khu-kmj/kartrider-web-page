@@ -1,19 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello World!</title>
-    <!--
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello World!</title>
+  <!--
     <link rel="stylesheet" href="/css/master.css" >
         -->
 </head>
-  <body>
-    <h1>유저 정보 출력</h1><br>
-    <script>
-    </script>
-        <span class="aid">USER ID<%= aid %></span><br>
-        <span class="name">NAME<%= name %></span><br>
-        <span class="level">LEVEL<%= level %></span>
 
-  </body>
+<body>
+  <script language="JavaScript">
+    var name = '<%-name%>';
+    var level = '<%-level%>';
+    var trackId= '<%-trackId%>';
+    var kart='<%-kart%>';
+
+    document.write(name);
+    document.write("\n");
+
+    function Img() {
+      var a = Math.floor(Math.random() * 9) + 1;
+      return "main_character/" + a + ".png";
+    }
+    function Img2(){
+      return "level/"+level+".png"
+    }
+    function Img3(){
+      return "track/"+trackId+".png"
+    }
+    function Img4(){
+      return "kart/"+kart+".png"
+    }
+  </script>
+    <img id="imgId" src="" width="135" height="100">
+    <script>document.getElementById("imgId").src = Img()</script>
+    <p>레벨</p>
+    <img id="imgId2" src="">
+  <script>document.getElementById("imgId2").src = Img2()</script>
+  <H1>――――――――――――――――경기 정보――――――――――――――</H1>
+  <p>등수</p>
+  <span class="rank"><%= rank %></span>
+  <p>주행 시간</p>
+  <span class="time"><%= time %></span>
+  <p>트랙정보</p>
+  <img id="imgId3" src="">
+  <script>document.getElementById("imgId3").src = Img3()</script>
+  <p>카트정보</p>
+  <img id="imgId4" src="" width="135" height="100">
+  <script>document.getElementById("imgId4").src = Img4()</script>
+
+
+</body>
+
 </html>
