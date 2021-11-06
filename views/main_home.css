@@ -1,0 +1,53 @@
+/*body{
+    height: 100vh;
+    background-repeat : no-repeat;
+    background-image: url('background.png');
+    background-size: cover;
+}*/
+html, body{
+    width: 100%;
+    height: 100%;
+    margin:0;
+}
+A{
+    position: relative;
+    top:0.8%;
+    left: 85%;
+    font-size: x-small;
+    font-weight: bold;
+    font-family: "나눔고딕";
+    text-decoration-line: none;
+    color: inherit;
+}
+#logo
+{
+    position: relative;
+    top:1%
+}
+#div1
+{
+    position: relative;
+    width: 100%;
+    height: 45%;
+    top:5%;
+    background-color: skyblue;
+}
+#btn1
+{   
+    position: relative;
+    top: 23%;
+    left: 30%;
+    padding: 0;
+    border: none;
+    background: none;
+}
+#btn2
+{    
+    position: relative;
+    top: 23%;
+    left: 50%;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
