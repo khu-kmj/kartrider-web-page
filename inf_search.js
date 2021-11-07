@@ -6,11 +6,13 @@ const bodyParser=require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));  // URL 인코딩 안함 
 app.use(bodyParser.json());                         // json 타입으로 파싱하게 설정
 app.use('/inf/result',express.static('metadata'));
+app.use('/',express.static('views'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 var chname;
+var vec=[];
 app.post("/inf/result",(req,res)=>{
     chname=encodeURIComponent(req.body.test);
 });
@@ -63,9 +65,19 @@ app.get("/inf/result",(req,res)=>{
           }
     });
 });
-
+app.post("/game",(req,res)=>{
+    vec.push(req.body.test);
+    console.log(vec);
+})
+app.get("/game",(req,res)=>{
+    res.render('game_home');
+})
 app.get("/inf",(req,res)=>{
     res.render('inf_search_home');
+});
+
+app.get("/",(req,res)=>{
+    res.render('main_home');
 });
 
 app.listen("8080",function(req,res){
