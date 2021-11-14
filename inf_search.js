@@ -3,16 +3,18 @@ var express = require('express');
 var app=express();
 
 const bodyParser=require('body-parser');
+const { fileURLToPath } = require('url');
 app.use(bodyParser.urlencoded({extended: false}));  // URL 인코딩 안함 
 app.use(bodyParser.json());                         // json 타입으로 파싱하게 설정
 app.use('/inf/result',express.static('metadata'));
 app.use('/',express.static('views'));
-
+app.use('/game/result',express.static('metadata'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 var chname;
 var vec=[];
+
 app.post("/inf/result",(req,res)=>{
     chname=encodeURIComponent(req.body.test);
 });
@@ -65,18 +67,29 @@ app.get("/inf/result",(req,res)=>{
           }
     });
 });
-app.post("/game",(req,res)=>{
-    vec.push(req.body.test);
-    console.log(vec);
+
+app.post("/game/result",(req,res)=>{
+    vec=req.body.test;
 })
+
+app.get("/game/result",(req,res)=>{
+    var fs=require('fs');
+    var url="kart_special"+vec+"/";
+    var testFolder="metadata/kart_special"+vec;
+    fs.readdir(testFolder, function(error, list){
+        var rand=Math.floor(Math.random()*list.length);
+        res.render('game_result',{url:url,body:list[rand]});
+    });
+});
+
 app.get("/game",(req,res)=>{
     res.render('game_home');
-})
+});
 app.get("/inf",(req,res)=>{
     res.render('inf_search_home');
 });
 
-app.get("/",(req,res)=>{
+app.get("/",(req,res)=>{ 
     res.render('main_home');
 });
 
