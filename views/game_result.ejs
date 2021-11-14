@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    var item='<%- body %>';
+    var url='<%- url %>';
+    function Img() {
+      return url+item;
+    }
+</script>
+</head>
+<body>
+    <img id="imgId" src="">
+    <script>document.getElementById("imgId").src = Img()</script>
+    
+</body>
+</html>
