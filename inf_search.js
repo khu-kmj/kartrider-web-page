@@ -27,39 +27,17 @@ app.get("/inf/result",(req,res)=>{
         headers:{Authorization: key}
     };
 
+
     request.get(options, function(error, response, body){
         if (!error && response.statusCode == 200) {
             var jsbody=JSON.parse(body);
             var option2={
-                url: "https://api.nexon.co.kr/kart/v1.0/users/"+jsbody.accessId+"/matches?start_date=&end_date= &offset=0&limit=1&match_types=",
+                url: "https://api.nexon.co.kr/kart/v1.0/users/"+jsbody.accessId+"/matches?start_date=&end_date= &offset=0&limit=10&match_types=",
                 headers:{Authorization: key}
             };
-            request.get(option2, function(error, response, body){
+            request.get(option2, function(error, response, body){            
                 var match=JSON.parse(body);
-                var tId=match.matches[0].matches[0].trackId;
-                var kartId=match.matches[0].matches[0].player.kart;
-                var mrank=match.matches[0].matches[0].player.matchRank;
-                //한화라고 검색하면 아직 오류존재
-                var players=match.matches[0].matches[0].playerCount;        
-                var stime=new Date(match.matches[0].matches[0].startTime.split('T')[0]+" "+match.matches[0].matches[0].startTime.split('T')[1]);
-                var etime=new Date(match.matches[0].matches[0].endTime.split('T')[0]+" "+match.matches[0].matches[0].endTime.split('T')[1]);
-                var diff=etime-stime
-                var minute= Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                var second = Math.floor((diff % (1000 * 60)) / 1000);
-                var diff_time=minute + " : " + second;
-                if(mrank=="99"){
-                    mrank="retire";   
-                    diff_time="retire";
-                }
-                var ranking=mrank+" / "+players
-                
-                if (!error && response.statusCode == 200) {
-                    res.render('inf_search_result', {name: jsbody.name, level: jsbody.level, trackId: tId, kart:kartId,rank:ranking,time: diff_time});
-                }
-                else{
-                    res.status(response.statusCode).end();
-                    console.log('error = ' + response.statusCode);
-                }     
+                res.render('inf_search_result',{name: jsbody.name, level: jsbody.level,body:JSON.stringify(match)});
             });
           } else {
             res.status(response.statusCode).end();
