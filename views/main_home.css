@@ -9,12 +9,19 @@ html, body{
     height: 100%;
     margin:0;
 }
-A{
+#link
+{
     position: relative;
     top:0.8%;
     left: 85%;
     font-size: x-small;
     font-weight: bold;
+    font-family: "나눔고딕";
+    text-decoration-line: none;
+    color: inherit;
+}
+#notice
+{
     font-family: "나눔고딕";
     text-decoration-line: none;
     color: inherit;
@@ -31,6 +38,29 @@ A{
     height: 45%;
     top:5%;
     background-color: skyblue;
+}
+#div2
+{
+    position: relative;
+    width: 500px;
+    height: 450px;
+    top:3%;
+    left:20%;
+    box-shadow: 1px 1px 1px rgb(209, 207, 207); 
+    background-color: white;
+}
+#table
+{
+    position:relative;
+    vertical-align: middle;
+    width:100%;
+
+}
+.line
+{
+    height: 40px;
+    margin-bottom: 10px;
+    border-bottom:1px solid rgb(223, 220, 220);
 }
 #btn1
 {   
