@@ -1,17 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="game_result.css" />
+</head>
 <script>
     var item='<%- body %>';
     var url='<%- url %>';
+    var stritem=item.split(".");
+    function load() {
+      return fetch("kart.json")
+        .then((response) => response.json())
+        .then((json) => json.kart);
+    }
+    load().then((kart) => {
+      const div_target = document.querySelector("#total");
+      var obj = document.createElement('text');
+      var obj2=document.createElement('text');
+      for (var i = 0; i < kart.length; i++) {
+        if (kart[i]['id'] == stritem[0]) {
+          obj.id="text1";
+          obj2.id="text2";
+          obj.innerText = "나에게 맞는 카트는 ";
+          obj2.innerText=kart[i]['name'];
+          break;
+        }
+      }
+      div_target.append(obj);
+      div_target.append(obj2);
+    });
+
     function Img() {
       return url+item;
     }
 </script>
-</head>
 <body>
+  <div id="total">
+    <div id="words">
+        <img id="imgkey" src="result/keyword.png">
+    </div>
+    <div id="rkart">
     <img id="imgId" src="">
     <script>document.getElementById("imgId").src = Img()</script>
-    
+  </div>
+  </div>  
 </body>
+<script>
+  var keyword="<%- keyword %>";
+  var keyarr=keyword.split(',');
+  const div_target=document.querySelector("#words");
+  var i=0, index=0;
+  while(index<7){
+    if(keyarr[index]!="empty"){
+      var obj=document.createElement('button');
+      obj.id="word"+(i+1);
+      obj.innerText='#'+keyarr[index];
+      div_target.append(obj);
+      i++;
+    }
+    index++;
+  }
+</script>
 </html>

@@ -3,54 +3,104 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello World!</title>
-  <!--
-    <link rel="stylesheet" href="/css/master.css" >
-        -->
+  <link rel="stylesheet" type="text/css" href="search.css" />
 </head>
-
-<body>
-  <script language="JavaScript">
-    var name = '<%-name%>';
-    var level = '<%-level%>';
-    var trackId= '<%-trackId%>';
-    var kart='<%-kart%>';
-
-    document.write(name);
-    document.write("\n");
-
-    function Img() {
+<script language="JavaScript">
+    function character(){
       var a = Math.floor(Math.random() * 9) + 1;
       return "main_character/" + a + ".png";
     }
-    function Img2(){
-      return "level/"+level+".png"
+    function level(){
+      return "level/" + '<%- level %>' + ".png";
     }
-    function Img3(){
-      return "track/"+trackId+".png"
-    }
-    function Img4(){
-      return "kart/"+kart+".png"
-    }
-  </script>
-    <img id="imgId" src="" width="135" height="100">
-    <script>document.getElementById("imgId").src = Img()</script>
-    <p>레벨</p>
-    <img id="imgId2" src="">
-  <script>document.getElementById("imgId2").src = Img2()</script>
-  <H1>――――――――――――――――경기 정보――――――――――――――</H1>
-  <p>등수</p>
-  <span class="rank"><%= rank %></span>
-  <p>주행 시간</p>
-  <span class="time"><%= time %></span>
-  <p>트랙정보</p>
-  <img id="imgId3" src="">
-  <script>document.getElementById("imgId3").src = Img3()</script>
-  <p>카트정보</p>
-  <img id="imgId4" src="" width="135" height="100">
-  <script>document.getElementById("imgId4").src = Img4()</script>
+</script>
+<body>
+  <div id="div">
+    <img id="imgId" src="" width="150" height="120">
+    <script>document.getElementById("imgId").src = character()</script>
+    <text id="nick">  <%- name %> </text>
+    <img id="imgId2" src="" width="30" height="30">
+    <script>document.getElementById("imgId2").src = level()</script>
+  </div>
 
+  <div id="sebo">
+
+  </div>
+  
+  <div id="resu">
+    <div id="most">
+    
+    </div>
+
+    <div id="div1"> 
+      <div id="div2"></div>
+    </div>
+  </div>
+
+  <div id="hle">
+    <text >  문의사항 : mjoo1106@naver.com | blog.naver.com/mjoo1106 </text>
+  </div>
 
 </body>
+<script>
+    var body = '<%- body -%>';
+    var match = JSON.parse(body);
+    var head=["승","타입","카트","맵","시간","순위","플레이"];
+    const target=document.querySelector('#div2');
+    for(var i=1; i<=7; i++){
+      var obj=document.createElement('div');
+      obj.id="tet"+i;
+      obj.innerText=head[i-1];
+      target.append(obj);
+    }
 
+    const div_target=document.querySelector('#div1');
+    for(var i=1; i<=5; i++){
+      var obj=document.createElement('div');
+      obj.id="fordiv";
+      div_target.append(obj);
+
+      var win = match.matches[0].matches[i-1].player.matchWin;
+      var tId = match.matches[0].matches[i-1].trackId;
+      var kartId = match.matches[0].matches[i-1].player.kart;
+      var mrank = match.matches[0].matches[i-1].player.matchRank;
+      var players = match.matches[0].matches[i-1].playerCount;
+      var stime = new Date(match.matches[0].matches[i-1].startTime.split('T')[0] + " " + match.matches[0].matches[i-1].startTime.split('T')[1]);
+      var etime = new Date(match.matches[0].matches[i-1].endTime.split('T')[0] + " " + match.matches[0].matches[i-1].endTime.split('T')[1]);
+      var diff = etime - stime
+      var minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var second = Math.floor((diff % (1000 * 60)) / 1000);
+      var ranking = mrank + " / " + players
+      var diff_time=minute + " : " + second;
+      if(win==0)
+        win="패";
+      else
+        win="승";
+      if (mrank == "99") {
+        ranking = "retire";
+        diff_time = "retire";
+      }
+      var arr=[win,"타입",kartId,tId,diff_time,ranking,"몇 일전?"];
+      for(var j=1; j<=7; j++){
+          var sobj=document.createElement('div');
+          sobj.id="tet"+j;
+          if(j==3){
+            var img=document.createElement('img');
+            img.id="IMG";
+            img.src="kart/"+arr[j-1]+".png";
+            sobj.append(img);
+          }
+          else if(j==4){
+            var img=document.createElement('img');
+            img.id="IMG";
+            img.src="track/"+arr[j-1]+".png";
+            sobj.append(img);
+          }
+          else{
+            sobj.innerText=arr[j-1];
+          }
+          obj.append(sobj);
+      }
+    }
+</script>
 </html>
