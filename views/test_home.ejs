@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>카트 테스트</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="test_home.css" />
+  <script>
+    var vec = "";
+    function Ajax(index) {
+      $.ajax({
+        url: '/test/result',       
+        async: true,            
+        type: 'POST',           
+        data: {
+          test: index  
+        }
+      });
+    }
+    function Any(num, index) {
+      vec += "/" + index;
+      var a = document.getElementById("div" + num);
+      var b = document.getElementById("div" + (num + 1));
+      a.style.display = "none";
+      b.style.display = "block";
+      var a = document.getElementById("div" + num);
+    }
+    function Post(index) {
+      vec += "/" + index;
+      Ajax(vec);
+    }
+  </script>
+</head>
+
+<body>
+  <img id="dao" src="metadata/image/bdao.png"></img>
+  <img id="uni" src="metadata/image/buni.png"></img>
+
+  <div class="box" id="div1">
+    <img id="index" src="metadata/image/one.png"></img>
+    <text id="tex1">Q1.</text><br>
+    <text id="tex2">대표 카트를 지정할 때</text>
+    <button id="btn" onClick="Any(1,1)">가장 좋은 신규 카트로 전시한다.</button>
+    <button id="btn" onClick="Any(1,2)">추억의 카트로 전시한다.</button>
+  </div>
+
+  <div class="box" id="div2" style="display:none">
+    <img id="index" src="metadata/image/two.png"></img>
+    <text id="tex1">Q2.</text><br>
+    <text id="tex2">3....2.....1 GAME START</text>
+    <button id="btn" onClick="Any(2,1)">부스터를 사용하여 치고나간다.</button>
+    <button id="btn" onClick="Any(2,2)">선두의 뒤에서 마지막 역전을 노린다.</button>
+  </div>
+
+  <div class="box" id="div3" style="display:none">
+    <img id="index" src="metadata/image/three.png"></img>
+    <text id="tex1">Q3.</text><br>
+    <text id="tex2">스피드 전에서 중요하게 생각하는 것</text>
+    <button id="btn" onClick="Any(3,1)">부스터 갯수</button>
+    <button id="btn" onClick="Any(3,2)">부스터 길이</button>
+  </div>
+
+  <div class="box" id="div4" style="display:none">
+    <img id="index" src="metadata/image/four.png"></img>
+    <text id="tex1">Q4.</text><br>
+    <text id="tex2">팀전을 하는 경우</text>
+    <button id="btn" onClick="Any(4,1)">1등이 우선! 혼자 치고 나가기</button>
+    <button id="btn" onClick="Any(4,2)">팀 승리가 우선! 전략적인 방법 세우기</button>
+  </div>
+
+  <div class="box" id="div5" style="display:none">
+    <img id="index" src="metadata/image/five.png"></img>
+    <text id="tex1">Q5.</text><br>
+    <text id="tex2">현재 1등을 잡기위해</text>
+    <button id="btn" onClick="Any(5,1)">아이템을 사용하여 격추한다.</button>
+    <button id="btn" onClick="Any(5,2)">부스터를 사용하여 역전한다.</button>
+  </div>
+
+  <div class="box" id="div6" style="display:none">
+    <img id="index" src="metadata/image/six.png"></img>
+    <text id="tex1">Q6.</text><br>
+    <text id="tex2">나는 카트를 볼 때</text>
+    <button id="btn" onClick="Any(6,1)">성능이 우선이다.</button>
+    <button id="btn" onClick="Any(6,2)">외형이 우선이다.</button>
+  </div>
+
+  <div class="box" id="div7" style="display:none">
+    <img id="index" src="metadata/image/seven.png"></img>
+    <text id="tex1">Q7.</text><br>
+    <text id="tex2">넥슨 캐쉬가 생겼다.</text>
+    <button id="btn" onClick="Post(1); location.href='test/result'">지금 당장 유료 카트를 구매한다.</button>
+    <button id="btn" onClick="Post(2); location.href='test/result'">지금 당장은 사용하지 않는다.</button>
+  </div>
+</body>
+
+</html>
