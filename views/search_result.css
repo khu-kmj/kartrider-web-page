@@ -1,0 +1,97 @@
+body{
+    background:rgb(240, 239, 239)
+}
+#hle
+{
+    position: relative;
+    top:3px;
+    left:-1120px;
+}
+#div
+{
+    position: relative;
+    width: 1150px;
+    height: 220px;
+    line-height: 200px;
+    margin: 0 auto;
+    background-image: url(search_chang.png);
+}
+
+#resu
+{
+    position: relative;
+    width: 1150px;
+    height: 1400px;
+    margin: 0 auto;
+    top:6px;
+}
+#most
+{
+    position: relative;
+    width: 370px;
+    height: 600px;
+    float:left;
+}
+#imgId
+{
+    vertical-align: middle;   
+}
+#nick
+{
+    font-size:xx-large;
+    font-weight: bold;
+}
+#div1
+{
+    position: relative;
+    width: 500px;
+    height: 900px;
+    left:3%;
+    float:left;
+}
+
+#IMG
+{
+    width:80px;
+    height:70px;
+}
+#IMG2
+{
+    width:100px;
+    height:60px;
+}
+#IMG2_TEXT
+{
+    position: relative;
+    top:5px;
+}
+#IMG3
+{
+    width:80px;
+    height:60px;
+}
+
+#img3
+{
+    position: relative;
+    width: 100%;
+    height:100%;
+    float:left;
+}
+
+#table
+{
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    text-align:center;
+}
+#table_row
+{
+    background: white;
+
+}
+#text_ranking
+{
+    font-size:x-large;
+    font-weight: bold;
+}

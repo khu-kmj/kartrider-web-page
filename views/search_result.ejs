@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="search_result.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+</head>
+<script language="JavaScript">
+    function character(){
+      var a = Math.floor(Math.random() * 9) + 1;
+      return "metadata/main_character/" + a + ".png";
+    }
+    function level(){
+      return "metadata/level/" + '<%- level %>' + ".png";
+    }
+</script>
+<body>
+  <div id="div">
+    <img id="imgId" src="" width="150" height="120">
+    <script>document.getElementById("imgId").src = character()</script>
+    <text id="nick">  <%- name %> </text>
+    <img id="imgId2" src="" width="30" height="30">
+    <script>document.getElementById("imgId2").src = level()</script>
+  </div>
+
+  
+  <div id="resu">
+    <div id="most">
+      <canvas id="myChart2"width="350" height="200"></canvas>
+      <text>RETIRE</text>
+      <canvas id="myChart"width="350" height="200"></canvas>
+      <table id="table_most" border="1">
+        <colgroup>
+          <col width="10%"/>
+          <col width="30%"/>
+          <col width="10%"/>
+          <col width="10%"/>
+        </colgroup>
+        <tr>
+          <td>카트</td>
+          <td>이름</td>
+          <td>save</td>
+          <td>판 수</td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="div1"> 
+      <table id="table">
+        <colgroup>
+          <col width="100px"/>
+          <col width="100px"/>
+          <col width="100px"/>
+          <col width="100px"/>
+          <col width="100px"/>
+        </colgroup>
+      </table>
+    </div>
+  </div>
+
+  <div id="hle">
+    <text>  문의사항 : mjoo1106@naver.com</text>
+  </div>
+</body>
+
+<script>
+    var body = '<%- body -%>';
+    var most_kart=[];
+    var rank_grape=[];
+    var match = JSON.parse(body);
+    const div_target=document.querySelector('#table');
+    for(var i=1; i<=10; i++){
+      var obj=document.createElement('tr');
+      obj.id="table_row";
+      var win = match.matches[0].matches[i-1].player.matchWin;
+      var tId = match.matches[0].matches[i-1].trackId;
+      var kartId = match.matches[0].matches[i-1].player.kart;
+      most_kart.push(kartId);
+      var mrank = match.matches[0].matches[i-1].player.matchRank;
+      var players = match.matches[0].matches[i-1].playerCount;
+      var stime = new Date(match.matches[0].matches[i-1].startTime.split('T')[0] + " " + match.matches[0].matches[i-1].startTime.split('T')[1]);
+      var etime = new Date(match.matches[0].matches[i-1].endTime.split('T')[0] + " " + match.matches[0].matches[i-1].endTime.split('T')[1]);
+      var diff = etime - stime
+      var minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var second = Math.floor((diff % (1000 * 60)) / 1000);
+      var ranking = mrank + "/" + players
+      var diff_time=minute + " : " + second;
+      var now_time=new Date();
+      var diff_day=Math.ceil((now_time-etime) / (1000*60*60*24))-1+"일 전";
+      
+      if(win=="0"){
+        win="패";
+        obj.style="background: white";
+      }
+      else if (win =="1"){
+        win="승";
+        
+        obj.style="background: rgb(163,207,236)";
+      }
+      else{
+        win="탈주"
+      }
+
+      if (mrank == "99" || win=="탈주") {
+        ranking = "retire";
+        diff_time = "retire";
+        obj.style="background: rgb(226,182,179)";
+        rank_grape.push(8);
+      }
+      else{
+        rank_grape.push(parseInt(mrank));
+      }
+
+      if(diff_day=="0일 전"){
+        diff_day=Math.ceil((now_time-etime)/1000/60/60)-1;
+        diff_day+="시간 전"
+      }
+
+      div_target.append(obj);
+      var arr=["개인전","#"+ranking,kartId,tId,diff_time,ranking];
+      for(var j=1; j<=5; j++){
+          var sobj=document.createElement('td');
+          if(j==1){
+            var tet1=document.createElement('text');
+            var tet2=document.createElement('text');
+            var br=document.createElement('br');
+            tet1.innerText=arr[j-1];
+            tet2.innerText=diff_day;
+            sobj.append(tet1);
+            sobj.append(br);
+            sobj.append(tet2);
+          }
+          else if(j==2){
+            var tet1=document.createElement('text');
+            tet1.innerText=arr[j-1];
+            tet1.id="text_ranking";
+            sobj.append(tet1);
+          }
+          else if(j==3){
+            var img=document.createElement('img');
+            var tet1=document.createElement('text');
+            var br=document.createElement('br');
+            img.id="IMG";
+            img.src="metadata/kart/"+arr[j-1]+".png";
+            tet1.innerText="카트이름"
+            sobj.append(img);
+            sobj.append(br);
+            sobj.append(tet1);
+          }
+          else if(j==4){
+            var img=document.createElement('img');
+            var tet1=document.createElement('text');
+            tet1.id="IMG2_TEXT";
+            var br=document.createElement('br');
+            img.id="IMG2";
+            img.src="metadata/track/"+arr[j-1]+".png";
+            tet1.innerText="맵 이름"
+            sobj.append(img);
+            sobj.append(br);
+            sobj.append(tet1);
+          }
+          else{
+            sobj.innerText=arr[j-1];
+          }
+          obj.append(sobj);
+      }
+    }
+    /////////////most카트라이더 부분/////////////////////////
+    /*const most_div=document.querySelector('#most');
+    var obj=documnet.createElement("button");
+    obj.innerText=most_kart[2];
+    most_div.append(obj);*/
+    var count=[];
+    for(var i=0; i<10; i++){
+      var item=most_kart[i];
+      count[i]=0;
+      for(var j=0; j<10; j++){
+        if(item==most_kart[j]){
+            count[i]+=1;
+        }
+      }
+    }
+    var max=0;
+    var index=0; //most_kart 배열에서 어디부분이 모스트인지 알려주는 index
+    for(var i=0; i<10; i++){
+      if(max<count[i]){
+        max=count[i];
+        index=i;
+      }
+    }
+    const most_div=document.querySelector('#table_most');
+    var obj=document.createElement('tr');
+    most_div.append(obj);
+    /*save는 retire횟수 따져주는 것*/
+    var temp_arr=[most_kart[index],"카트이름","30%",max];
+    for(var i=0; i<4; i++){
+          var sobj=document.createElement('td');
+          if(i==0){
+            var img=document.createElement('img');
+            img.id="IMG3";
+            img.src="metadata/kart/"+temp_arr[i]+".png";
+            sobj.append(img);
+          }
+          else{
+            sobj.innerText=temp_arr[i];
+          }
+          obj.append(sobj);
+    }
+    //sebo부분//////////////////////////////////////////////////////////
+    rank_grape=rank_grape.reverse();
+    var options={
+      type: 'line',
+      data:{
+        labels: ['', '', '', '', '', '','','','',''],
+        datasets: [{
+            label: 'rank',
+            data: rank_grape,
+            backgroundColor:[
+              'rgba(0, 0, 0, 0)'
+            ],
+            borderColor:[
+            'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 2
+        }]
+    },
+      options:{
+        responsive:false,
+        scales:{
+          xAxes:[{
+            gridLines:{
+              display:false
+            }
+          }],
+          yAxes: [{
+            ticks:{
+              reverse:true,
+              min:1,
+              max:8,
+              stepSize:1
+            }
+          }]
+        }
+      }
+    };
+    var ctx=document.getElementById('myChart').getContext('2d');
+    new Chart(ctx,options);
+    ///////////////////////
+    var options2={
+      type: 'doughnut',
+      data:{
+        datasets: [{
+            data: [50,50],
+        }]
+    },
+      options:{
+        responsive:false,
+        scales:{
+          xAxes: [{
+            gridLines:{
+              display:false
+            },
+            ticks:{
+              display:false
+            }
+          }],
+          yAxes: [{
+            gridLines:{
+              display:false
+            },
+            ticks:{
+              display:false
+            }
+          }]
+        }
+      }
+    };
+    var ctx2=document.getElementById('myChart2').getContext('2d');
+    new Chart(ctx2,options2);
+</script>
+</html>
