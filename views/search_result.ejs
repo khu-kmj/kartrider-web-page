@@ -5,31 +5,65 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="search_result.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <script language="JavaScript">
-    function character(){
-      var a = Math.floor(Math.random() * 9) + 1;
-      return "metadata/main_character/" + a + ".png";
-    }
     function level(){
       return "metadata/level/" + '<%- level %>' + ".png";
+    }
+    function embl(){
+      var rand=Math.floor(Math.random()*8+1);
+     return "background-image:url('metadata/emblem/emblem"+rand+".png')";
+    }
+    function get_jsondata(id, kind){
+      var str;
+      var local_url='metadata/'+kind+'.json';
+      function save(data){
+        str=data;
+      }
+      $.ajaxSetup({
+        async: false
+      });
+      $.getJSON(local_url,function(json){
+        var kind_json;
+        if(kind=="kart"){
+          kind_json=json.kart;
+        }
+        else if(kind=="track"){
+          kind_json=json.track;
+        }
+        else if(kind=="character"){
+          kind_json=json.character;
+        }
+        for (var i = 0; i < kind_json.length; i++) {
+          if (kind_json[i]['id'] == id) {
+            save(kind_json[i]['name']);
+            break;
+          }
+        }
+      });
+      return str;
     }
 </script>
 <body>
   <div id="div">
-    <img id="imgId" src="" width="150" height="120">
-    <script>document.getElementById("imgId").src = character()</script>
-    <text id="nick">  <%- name %> </text>
-    <img id="imgId2" src="" width="30" height="30">
-    <script>document.getElementById("imgId2").src = level()</script>
+    <div id="emblem">
+      <script>document.getElementById("emblem").style = embl()</script>
+    </div>
+    <div id="name">
+      <text id="nick">  <%- name %> </text>
+    </div>
+    <img id="s_home" src="metadata/image/search_image.png">
   </div>
 
   
   <div id="resu">
     <div id="most">
+      <text id="title">SAVE</text>
       <canvas id="myChart2"width="350" height="200"></canvas>
-      <text>RETIRE</text>
+      <text id="title"><br>RANKING GRAPE</text>
       <canvas id="myChart"width="350" height="200"></canvas>
+      <text id="title"><br>MOST KART</text>
       <table id="table_most" border="1">
         <colgroup>
           <col width="10%"/>
@@ -51,16 +85,13 @@
         <colgroup>
           <col width="100px"/>
           <col width="100px"/>
-          <col width="100px"/>
+          <col width="150px"/>
+          <col width="200px"/>
           <col width="100px"/>
           <col width="100px"/>
         </colgroup>
       </table>
     </div>
-  </div>
-
-  <div id="hle">
-    <text>  문의사항 : mjoo1106@naver.com</text>
   </div>
 </body>
 
@@ -68,13 +99,16 @@
     var body = '<%- body -%>';
     var most_kart=[];
     var rank_grape=[];
+    var retire=0;
     var match = JSON.parse(body);
+    var Len = match.matches[0].matches.length;
     const div_target=document.querySelector('#table');
-    for(var i=1; i<=10; i++){
+    for(var i=1; i<=Len; i++){
       var obj=document.createElement('tr');
       obj.id="table_row";
       var win = match.matches[0].matches[i-1].player.matchWin;
       var tId = match.matches[0].matches[i-1].trackId;
+      var character=match.matches[0].matches[i-1].character;
       var kartId = match.matches[0].matches[i-1].player.kart;
       most_kart.push(kartId);
       var mrank = match.matches[0].matches[i-1].player.matchRank;
@@ -83,7 +117,11 @@
       var etime = new Date(match.matches[0].matches[i-1].endTime.split('T')[0] + " " + match.matches[0].matches[i-1].endTime.split('T')[1]);
       var diff = etime - stime
       var minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      if(minute<10)
+        minute='0'+minute;
       var second = Math.floor((diff % (1000 * 60)) / 1000);
+      if(second<10)
+        second='0'+second;
       var ranking = mrank + "/" + players
       var diff_time=minute + " : " + second;
       var now_time=new Date();
@@ -104,6 +142,7 @@
 
       if (mrank == "99" || win=="탈주") {
         ranking = "retire";
+        retire+=1;
         diff_time = "retire";
         obj.style="background: rgb(226,182,179)";
         rank_grape.push(8);
@@ -118,8 +157,8 @@
       }
 
       div_target.append(obj);
-      var arr=["개인전","#"+ranking,kartId,tId,diff_time,ranking];
-      for(var j=1; j<=5; j++){
+      var arr=["개인전","#"+ranking,kartId,tId,character,diff_time,ranking];
+      for(var j=1; j<=6; j++){
           var sobj=document.createElement('td');
           if(j==1){
             var tet1=document.createElement('text');
@@ -140,10 +179,17 @@
           else if(j==3){
             var img=document.createElement('img');
             var tet1=document.createElement('text');
+            var str=get_jsondata(arr[j-1],"kart");
             var br=document.createElement('br');
             img.id="IMG";
-            img.src="metadata/kart/"+arr[j-1]+".png";
-            tet1.innerText="카트이름"
+            if(str==null){
+              tet1.innerText="조회 불가능"
+              img.src="metadata/image/empty.png";
+            }
+            else{
+              tet1.innerText=str;      
+              img.src="metadata/kart/"+arr[j-1]+".png";
+            }
             sobj.append(img);
             sobj.append(br);
             sobj.append(tet1);
@@ -151,11 +197,30 @@
           else if(j==4){
             var img=document.createElement('img');
             var tet1=document.createElement('text');
+            var str=get_jsondata(arr[j-1],"track");
             tet1.id="IMG2_TEXT";
             var br=document.createElement('br');
             img.id="IMG2";
-            img.src="metadata/track/"+arr[j-1]+".png";
-            tet1.innerText="맵 이름"
+            if(str==null || str[1]=='r'){
+              tet1.innerText="조회 불가능"
+              img.src="metadata/image/empty.png";
+            }
+            else{
+              tet1.innerText=str;
+              img.src="metadata/track/"+arr[j-1]+".png";
+            }
+            sobj.append(img);
+            sobj.append(br);
+            sobj.append(tet1);
+          }
+          else if(j==5){
+            var img=document.createElement('img');
+            var str=get_jsondata(arr[j-1],"character");
+            var tet1=document.createElement('text');
+            var br=document.createElement('br');
+            img.id="IMG4";
+            img.src="metadata/character/"+arr[j-1]+".png";
+            tet1.innerText=str;
             sobj.append(img);
             sobj.append(br);
             sobj.append(tet1);
@@ -167,15 +232,11 @@
       }
     }
     /////////////most카트라이더 부분/////////////////////////
-    /*const most_div=document.querySelector('#most');
-    var obj=documnet.createElement("button");
-    obj.innerText=most_kart[2];
-    most_div.append(obj);*/
     var count=[];
-    for(var i=0; i<10; i++){
+    for(var i=0; i<Len; i++){
       var item=most_kart[i];
       count[i]=0;
-      for(var j=0; j<10; j++){
+      for(var j=0; j<Len; j++){
         if(item==most_kart[j]){
             count[i]+=1;
         }
@@ -183,7 +244,7 @@
     }
     var max=0;
     var index=0; //most_kart 배열에서 어디부분이 모스트인지 알려주는 index
-    for(var i=0; i<10; i++){
+    for(var i=0; i<Len; i++){
       if(max<count[i]){
         max=count[i];
         index=i;
@@ -193,13 +254,19 @@
     var obj=document.createElement('tr');
     most_div.append(obj);
     /*save는 retire횟수 따져주는 것*/
-    var temp_arr=[most_kart[index],"카트이름","30%",max];
+    var temp_arr=[most_kart[index],get_jsondata(most_kart[index],'kart'),(Len-retire)*10+"%",max];
     for(var i=0; i<4; i++){
           var sobj=document.createElement('td');
           if(i==0){
             var img=document.createElement('img');
             img.id="IMG3";
-            img.src="metadata/kart/"+temp_arr[i]+".png";
+            if(temp_arr[1]==null){
+              temp_arr[1]="조회 불가능"
+              img.src="metadata/image/empty.png";
+            }
+            else{
+              img.src="metadata/kart/"+temp_arr[i]+".png";
+            }
             sobj.append(img);
           }
           else{
@@ -247,14 +314,20 @@
     var ctx=document.getElementById('myChart').getContext('2d');
     new Chart(ctx,options);
     ///////////////////////
+    
     var options2={
       type: 'doughnut',
       data:{
+        labels:['retire','save'],
         datasets: [{
-            data: [50,50],
+            data: [retire,Len-retire],
+            backgroundColor:[
+              'rgba(255, 100, 100, 1)',
+              'rgba(54, 162, 235, 1)'
+            ],
         }]
     },
-      options:{
+     /* options:{
         responsive:false,
         scales:{
           xAxes: [{
@@ -274,7 +347,7 @@
             }
           }]
         }
-      }
+      }*/
     };
     var ctx2=document.getElementById('myChart2').getContext('2d');
     new Chart(ctx2,options2);
