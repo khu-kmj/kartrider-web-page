@@ -47,6 +47,25 @@ html, body{
     top:5%;
     background-color: skyblue;
 }
+#btn1
+{   
+    position: relative;
+    top: 23%;
+    left: 30%;
+    padding: 0;
+    border: none;
+    background: none;
+}
+#btn2
+{    
+    position: relative;
+    top: 23%;
+    left: 50%;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
 #div2
 {
     position: relative;
@@ -79,24 +98,6 @@ html, body{
 #ranktd
 {
     text-align: center;
-}
-#btn1
-{   
-    position: relative;
-    top: 23%;
-    left: 30%;
-    padding: 0;
-    border: none;
-    background: none;
-}
-#btn2
-{    
-    position: relative;
-    top: 23%;
-    left: 50%;
-    padding: 0;
-    border: none;
-    background: none;
 }
 #test
 {
