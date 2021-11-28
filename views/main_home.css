@@ -39,7 +39,7 @@ html, body{
     position: relative;
     top:1%
 }
-#div1
+#select_div
 {
     position: relative;
     width: 100%;
@@ -47,44 +47,69 @@ html, body{
     top:5%;
     background-color: skyblue;
 }
+
 #btn1
 {   
     position: relative;
-    top: 23%;
+    width:200px;
+    height:200px;
+    top: 50%;
     left: 30%;
     padding: 0;
     border: none;
+    margin:-100px 0px 0px -100px;
     background: none;
 }
 #btn2
 {    
     position: relative;
-    top: 23%;
-    left: 50%;
+    width:200px;
+    height:200px;
+    top: 50%;
+    left: 60%;
     padding: 0;
     border: none;
+    margin:-100px 0px 0px -100px;
     background: none;
 }
-
-#div2
+#test
+{
+    font-size:x-large;
+    color:rgb(0, 60, 150);
+    font-weight: bold;
+}
+#search
+{
+    font-size:x-large;
+    color:rgb(155, 22, 5);
+    font-weight: bold;
+}
+#main_div
+{
+    position: relative;
+    width: 100%;
+    height: 45%;
+    top:5%;
+}
+#notice_div
 {
     position: relative;
     width: 500px;
     height: 450px;
-    top:3%;
     float:left;
-    left:20%;
+    left:30%;
+    margin:-10px 0px 0px -250px;
     box-shadow: 1px 1px 1px rgb(209, 207, 207); 
     background-color: white;
 }
-#div3
+#ranking_div
 {
     position: relative;
     width: 500px;
     height: 450px;
     float:left;
-    top:3%;
-    left:26%;
+    left:55%;
+    margin:-10px 0px 0px -250px;
     box-shadow: 1px 1px 1px rgb(209, 207, 207); 
     background-color: white;
 }
@@ -98,16 +123,4 @@ html, body{
 #ranktd
 {
     text-align: center;
-}
-#test
-{
-    font-size:x-large;
-    color:rgb(0, 60, 150);
-    font-weight: bold;
-}
-#search
-{
-    font-size:x-large;
-    color:rgb(155, 22, 5);
-    font-weight: bold;
 }
