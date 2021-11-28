@@ -46,25 +46,19 @@
     }
 </script>
 <body>
-  <div id="div">
-    <div id="emblem">
-      <script>document.getElementById("emblem").style = embl()</script>
-    </div>
-    <div id="name">
-      <text id="nick">  <%- name %> </text>
-    </div>
-    <img id="s_home" src="metadata/image/search_image.png">
-  </div>
-
-  
-  <div id="resu">
     <div id="most">
-      <text id="title">SAVE</text>
+      <div id="emblem">
+        <script>document.getElementById("emblem").style = embl()</script>
+      </div>
+      <div id="name">
+        <text id="nick">  <%- name %> </text>
+      </div>
+      <text id="title"><br>SAVE</text>
       <canvas id="myChart2"width="350" height="200"></canvas>
       <text id="title"><br>RANKING GRAPE</text>
       <canvas id="myChart"width="350" height="200"></canvas>
       <text id="title"><br>MOST KART</text>
-      <table id="table_most" border="1">
+      <table id="table_most" border="1" style="text-align: center;">
         <colgroup>
           <col width="10%"/>
           <col width="30%"/>
@@ -81,6 +75,7 @@
     </div>
 
     <div id="div1"> 
+      <img id="s_home" src="metadata/image/search_image.png">
       <table id="table">
         <colgroup>
           <col width="100px"/>
@@ -92,7 +87,6 @@
         </colgroup>
       </table>
     </div>
-  </div>
 </body>
 
 <script>

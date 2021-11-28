@@ -15,8 +15,6 @@ body{
     position:relative;
     width:120px;
     height:120px;
-    top:50%;
-    margin:-60px 0px 0px 5px;
     box-shadow: 2px 2px 2px rgb(166, 166, 166); 
     border:2px solid rgb(166, 166, 166);
     float:left;
@@ -25,15 +23,14 @@ body{
 {
     position:relative;
     width:300px;
-    height:50px;
-    top:50%;
-    margin:-25px 0px 0px 20px;
-    float:left;
+    height:120px;
+    top:4%;
+    left:3%;
 }
 #s_home
 {
     position:relative;
-    left:355px;
+    width:100%;
 }
 #title
 {
@@ -52,9 +49,9 @@ body{
 #most
 {
     position: relative;
-    width: 370px;
+    width: 400px;
     height: 800px;
-    left:-250px;
+    left:6%;
     float:left;
 }
 #imgId
@@ -70,9 +67,9 @@ body{
 #div1
 {
     position: relative;
-    width: 800px;
+    width: 50%;
     height: 900px;
-    left:-150px;
+    left:10%;
     float:left;
 }
 
