@@ -158,3 +158,26 @@
     font-weight: bold;
     color:rgb(0, 153, 255);
 }
+#home
+{
+    position:relative;
+    font-family: 'Nanum Gothic';
+    font-size:x-large;
+    font-weight: bold;
+    color:white;
+    top:80%;
+    left:35%;
+    background-color: rgb(0, 153, 255);
+    
+}
+#reset
+{
+    position:relative;
+    font-family: 'Nanum Gothic';
+    font-size:x-large;
+    font-weight: bold;
+    color:white;
+    top:80%;
+    left:55%;
+    background-color: rgb(0, 153, 255);
+}
