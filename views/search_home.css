@@ -82,3 +82,8 @@ body
     left:35%;
     margin:15px 0px 0px 0px;
 }
+#loading
+{
+  position:relative;
+  left:-25%;
+}

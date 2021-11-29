@@ -7,11 +7,12 @@
         <link rel="stylesheet" type="text/css" href="search_home.css" />
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+ 
     </head>
     <body>
         <img class="box" id="left" src="metadata/image/wodi.png">
         <img class="box2" id="right" src="metadata/image/sdao.png">
-        <div class="search">
+        <div class="search" id="a">
             <input type="text" id="name" placeholder="카트라이더 닉네임 입력" />
             <button id="OK"></button>
         </div>
@@ -27,6 +28,11 @@
                     dataType: 'json',
                     success: function(data){
                         if(data=="200"){
+                            const div_target=document.querySelector('#a');
+                            var obj=document.createElement('img');
+                            obj.id="loading";
+                            obj.src='metadata/image/loading.gif';
+                            div_target.append(obj);
                             window.location.href="/search/result";
                         }
                         else{
