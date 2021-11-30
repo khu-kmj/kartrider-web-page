@@ -26,6 +26,7 @@ app.post('/test/result',test.result_post);
 
 /* inf */
 app.get('/search',search.home_get);
+app.post('/search',search.home_post);
 app.get('/search/result',search.result_get);
 app.post('/search/result',search.result_post);
 
