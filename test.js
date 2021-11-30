@@ -33,7 +33,6 @@ exports.result_get=function(req,res){
         if(i!=2 && i!=3 && i!=4 && i!=5 && i!=10 && i!=11)
             temp+=vectemp[0][i];
     }
-    console.log(vectemp);
     vectemp.splice(0,1);
     var fs=require('fs');
     var url="metadata/kart_find"+temp+"/";
