@@ -51,7 +51,7 @@ try {
     console.log(error);
   }
   
-/* local server
+/*local server
 app.listen("8080",function(req,res){
     console.log('server listening at port no. 8080');
 });
