@@ -29,27 +29,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">Best-README-Template</h3>
-
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
+  <h3 align="center">KartRider</h3>
+  <p align="center">전적 검색과 성향 테스트 결과에 따른 카트 추천</p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -82,18 +64,19 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Page][product-screenshot]](https://2019110627.osschatbot.ga:23023/)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+카트라이더는 넥슨에서 서비스 하는 레이싱 비디오 게임이다. 2004년 부터 서비스를 하고 있지만 lol과 다르게 전적 검색 사이트가 많이 존재하지 않는다.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+카트라이더의 홍보와 경쟁전(개인전)에서 전적이 궁금한 사람들을 위해 개발한 웹 서비스이다.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+이 웹 사이트는 다음과 같은 서비스를 제공하고 있다.
+* 닉네임을 통한 전적 검색(개인전, 그랑프리, 개인 무한부스터에 대한 결과 제공)
+* 7가지 질문을 통한 카트바디 추천
+* 그랑프리 랭킹
+* 카이라이더 공지 사항 및 업데이트
 
-Use the `BLANK_README.md` to get started.
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -101,15 +84,11 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+List frameworks/libraries in my project.
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
+* [Node.js](https://nodejs.org/)
+* [Express.js](https://expressjs.com/)
+* [Sweetalert2](https://sweetalert2.github.io/)
 * [JQuery](https://jquery.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -132,20 +111,19 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key at [https://developers.nexon.com/kart](https://developers.nexon.com/kart)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone http://khuhub.khu.ac.kr/2019110627/kartrider.git
    ```
 3. Install NPM packages
    ```sh
-   npm install
+   npm install 
    ```
-4. Enter your API in `config.js`
+4. Enter your API in `search.js`
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   const key = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -155,10 +133,50 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+main.js
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+``` JS
+/* AWS */
+const fs = require('fs');
+const path = require('path');
+const HTTPS = require('https');
+const domain = "DOMAIN";
+const sslport = "SSLPORT";
 
+try {
+    const option = {
+      ca: fs.readFileSync('/etc/letsencrypt/live/' + domain +'/fullchain.pem'),
+      key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/privkey.pem'), 'utf8').toString(),
+      cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/cert.pem'), 'utf8').toString(),
+    };
+  
+    HTTPS.createServer(option, app).listen(sslport, () => {
+      console.log(`[HTTPS] Server is started on port ${sslport}`);
+    });
+  } catch (error) {
+    console.log('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+    console.log(error);
+  }
+  
+/* local server
+app.listen("8080",function(req,res){
+    console.log('server listening at port no. 8080');
+});
+*/
+```
+
+HOME PAGE
+[![homepage][homepage]]
+
+
+TEST PAGE
+[![testpage][test]]
+[![resultpage][test_r]]
+
+
+SEARCH PAGE
+[![testpage][search]]
+[![resultpage][search_r]]
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -166,7 +184,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
 - [x] Add back to top links
 - [ ] Add Additional Templates w/ Examples
 - [ ] Add "components" document to easily copy & paste sections of the readme
@@ -189,9 +206,9 @@ If you have a suggestion that would make this better, please fork the repo and c
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch 
+3. Commit your Changes 
+4. Push to the Branch
 5. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -210,9 +227,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+김명주 - [@naver_blog](https://blog.naver.com/mjoo1106) - mjoo1106@naver.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [http://khuhub.khu.ac.kr/2019110627/kartrider](http://khuhub.khu.ac.kr/2019110627/kartrider)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -250,4 +267,10 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/kart.png
+[homepage]:images/homepage.png
+[search]:images/search.png
+[search_r]:images/search_r.png
+[test]:images/test.png
+[test_r]:images/test_r.png
+
