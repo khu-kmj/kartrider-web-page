@@ -123,6 +123,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 4. Enter your API in `search.js`
    ```js
+   //require("dotenv").config({path: ".env"}); 
    const key = 'ENTER YOUR API';
    ```
 
@@ -166,17 +167,17 @@ app.listen("8080",function(req,res){
 ```
 
 HOME PAGE
-[![homepage][homepage]]
+![homepage][homepage]
 
 
 TEST PAGE
-[![testpage][test]]
-[![resultpage][test_r]]
+![testpage][test]
+![resultpage][test_r]
 
 
 SEARCH PAGE
-[![testpage][search]]
-[![resultpage][search_r]]
+![testpage][search]
+![resultpage][search_r]
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -185,13 +186,14 @@ SEARCH PAGE
 ## Roadmap
 
 - [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
+- [x] Add AWS version
+- [x] Add Home page
+- [x] Add Additional Templates
+- [x] Add "components" document to easily copy & paste sections of the readme
 - [ ] Multi-language Support
+    - [x] Korean
     - [ ] Chinese
     - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -218,7 +220,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+METADATA : It's owned by Nexon(Kartrider)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -238,16 +240,9 @@ Project Link: [http://khuhub.khu.ac.kr/2019110627/kartrider](http://khuhub.khu.a
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+* [Use kartrider api](https://developers.nexon.com/kart/guides)
+* [How to use Ajax](https://api.jquery.com/jquery.ajax/)
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
