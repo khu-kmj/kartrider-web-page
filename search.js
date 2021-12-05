@@ -1,5 +1,7 @@
+// .env파일을 사용하지 않는 경우 주석처리
 require("dotenv").config({path: ".env"});
-var key=process.env.API_KEY;
+// var key="ENTER YOUR API KEY"
+const key=process.env.API_KEY;
 var request=require('request');
 var userId=[];
 var username=[];
@@ -34,7 +36,7 @@ exports.result_get = function (req, res) {
     var api_url="https://api.nexon.co.kr/kart/v1.0/users/" + userId[0] + "/matches?start_date=&end_date= &offset=0&limit=10&match_types=7b9f0fd5377c38514dbb78ebe63ac6c3b81009d5a31dd569d1cff8f005aa881a";
     userId.splice(0,1);
     var options = {
-        //개인전만 검색하는 것임
+        //개인전(그랑프리, 무한 부스터 등) 검색
         url: api_url,
         headers: { Authorization: key }
     };
