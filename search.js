@@ -1,4 +1,5 @@
-var key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiMjAxNjMxMTYzIiwiYXV0aF9pZCI6IjQiLCJ0b2tlbl90eXBlIjoiQWNjZXNzVG9rZW4iLCJzZXJ2aWNlX2lkIjoiNDMwMDExMzkzIiwiWC1BcHAtUmF0ZS1MaW1pdCI6IjIwMDAwOjEwIiwibmJmIjoxNjM4NDkyNjk2LCJleHAiOjE3MDE1NjQ2OTYsImlhdCI6MTYzODQ5MjY5Nn0.LkWKCt0r_VoQ3jgQJe_hlMcTZ5H6NFt-CzFxNn5aRqE"
+require("dotenv").config({path: ".env"});
+var key=process.env.API_KEY;
 var request=require('request');
 var userId=[];
 var username=[];
