@@ -20,7 +20,9 @@
 </body>
 
 <script>
-    $("#OK").click(function () {      
+    $("#OK").click(function () {  
+        var saveBtn=document.querySelector("#OK");
+        saveBtn.disabled=true;    
         $.ajax({
             url: '/search',       
             async: true,            

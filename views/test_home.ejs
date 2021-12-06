@@ -27,6 +27,10 @@
       var a = document.getElementById("div" + num);
     }
     function Post(index) {
+      var saveBtn=document.querySelector(".Post1");
+      saveBtn.disabled=true;
+      var saveBtn2=document.querySelector(".Post2");
+      saveBtn2.disabled=true;
       vec += "/" + index;
       Ajax(vec);
     }
@@ -89,8 +93,8 @@
     <img id="index" src="metadata/image/seven.png"></img>
     <text id="tex1">Q7.</text><br>
     <text id="tex2">넥슨 캐쉬가 생겼다.</text>
-    <button id="btn" onClick="Post(1); location.href='test/result'">지금 당장 유료 카트를 구매한다.</button>
-    <button id="btn" onClick="Post(2); location.href='test/result'">지금 당장은 사용하지 않는다.</button>
+    <button class="Post1" id="btn" onClick="Post(1); location.href='test/result'">지금 당장 유료 카트를 구매한다.</button>
+    <button class="Post2" id="btn" onClick="Post(2); location.href='test/result'">지금 당장은 사용하지 않는다.</button>
   </div>
 </body>
 
