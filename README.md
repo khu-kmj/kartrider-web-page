@@ -231,7 +231,6 @@ METADATA : It's owned by Nexon(Kartrider)
 
 김명주 - [@naver_blog](https://blog.naver.com/mjoo1106) - mjoo1106@naver.com
 
-Project Link: [http://khuhub.khu.ac.kr/2019110627/kartrider](http://khuhub.khu.ac.kr/2019110627/kartrider)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
