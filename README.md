@@ -230,7 +230,8 @@ METADATA : It's owned by Nexon(Kartrider)
 <!-- CONTACT -->
 ## Contact
 
-김명주 - [@naver_blog](https://blog.naver.com/mjoo1106) - mjoo1106@naver.com
+김명주 - mjoo1106@khu.ac.kr<br>
+김민재 - alswoda76@khu.ac.kr
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
